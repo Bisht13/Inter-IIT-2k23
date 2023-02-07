@@ -247,4 +247,4 @@ const tokenAbi = [
   },
 ];
 
-export {tokenAbi};
+export { tokenAbi };
