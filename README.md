@@ -38,18 +38,31 @@ ___
 <br>
 <br>
 ![](https://i.imgur.com/Bsf2hFH.png)
+<br>
+### Demo
+<img src ="/assets/2fa.gif" width = "1200">
+<br>
+
 ___
 ### 2. Staking/ Unstaking Snap
 &nbsp;&nbsp;&nbsp;&nbsp;This snap allows the users to stake the desired amount of assets to defi protocols such as AAVE and Compound in a set interval of time. The user can also redeem their supplied assets with the help of the ‘unstake’ functionality. This snap uses the onCronjob method to perform the required task periodically.
 <br>
 <br>
 ![staking](https://i.imgur.com/Zxa8FCu.png)
+<br>
+### Demo
+<img src ="/assets/stakeDemoFinal.gif" width="400">
+<br>
 
 
 
 ___
 ### 3. Transaction Summary Snap
 &nbsp;&nbsp;&nbsp;&nbsp;A malicious dapp can misguide users with its front end. For example, a buy button can withdraw all funds. In such a situation, the transaction snap will give a summary of the exact details of what the transaction will do with the user’s funds. As the name suggests, it shows the entire transaction summary of the upcoming transaction before signing the actual transaction.This snap provides the user with an AI generated summary for the transaction they are currently performing. This snap provides the contract source code and the function the user is interacting with OpenAI's GPT engine, that generates an user-friendly insight for the ongoing transaction.
+<br>
+### Demo
+<img src ="/assets/summary.gif" width = "1200">
+<br>
 ___
 ### 4. Smart Contract Wallet Snap
 &nbsp;&nbsp;&nbsp;&nbsp; Smart Contract wallets are the wallets that control funds through code unlike Private Key as is the case with Externally Owned Accounts (EOAs). We have deployed a factory contract with all the basic functionalities. The smart contract account has a modular structure that allows the user to add a module of feature of his own choice. Some of the modules that we have added to the contract are - Role based multiple auths, Whitelisting smart contracts , MEV resistant swapping of tokens.
@@ -84,15 +97,26 @@ ___
 &nbsp;&nbsp;&nbsp;&nbsp;This snap enables the user to simulate the initiated transaction (using Tenderly.co’s API) before signing. In case the transaction is going to fail, the user gets an idea beforehand about the failure and the errors that the transaction may encounter. If the transaction is going to succeed, the user gets a track of his funds.
 <br>
 ![Simulation](https://i.imgur.com/R396VE8.png)
-
+<br>
+### Demo
+<img src ="/assets/sim.gif" width = "1200">
+<br>
 
 ___
 ### 7. Smart Contract Approval/Revoke Snap
 &nbsp;&nbsp;&nbsp;&nbsp;This snap allows the user to fetch a list of his approved smart contracts for various ERC20 tokens. This snap also allows users to revoke approval to any spender smart contract that was approved earlier.
+<br>
+### Demo
+<img src ="/assets/appprove_revoke.gif" width = "1200">
+<br>
 
 ___
 ### 8. Impersonation Snap
 &nbsp;&nbsp;&nbsp;&nbsp;There are scenarios when users want to look for someone else's address positions on snap to get an idea of which and how much assets are being holder by that address. This snap allows the user to view the position of any other user’s address in DeFi protocols like AAVE, Compound etc.
+<br>
+### Demo
+<img src ="/assets/impersonation demo.gif" width = "1200">
+<br>
 ___
 
 ## Challenges we ran into
