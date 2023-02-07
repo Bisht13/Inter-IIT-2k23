@@ -65,10 +65,17 @@
       "gatsby-plugin-manifest>gatsby>lmdb": false,
       "gatsby-plugin-manifest>gatsby>lmdb>msgpackr>msgpackr-extract": false,
       "gatsby-plugin-manifest>gatsby>memoizee>es5-ext": false,
-      "gatsby-plugin-manifest>sharp": true
+      "gatsby-plugin-manifest>sharp": true,
+      "$root$": false
     }
   },
   "dependencies": {
-    "@metamask/snap-types": "^0.23.0"
+    "@metamask/snap-types": "^0.23.0",
+    "@types/speakeasy": "^2.0.7",
+    "hi-base32": "^0.5.1",
+    "node-stdlib-browser": "^1.2.0",
+    "patch-package": "^6.5.1",
+    "rfc4648": "^1.5.2",
+    "speakeasy": "^2.0.0"
   }
 }

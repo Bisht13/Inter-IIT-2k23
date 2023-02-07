@@ -1,0 +1,106 @@
+diff --git a/node_modules/speakeasy/index.js b/node_modules/speakeasy/index.js
+index f6e6cd0..f30c13e 100644
+--- a/node_modules/speakeasy/index.js
++++ b/node_modules/speakeasy/index.js
+@@ -23,45 +23,46 @@ var util = require('util');
+ exports.digest = function digest (options) {
+   var i;
+ 
+-  // unpack options
+-  var secret = options.secret;
+-  var counter = options.counter;
+-  var encoding = options.encoding || 'ascii';
+-  var algorithm = (options.algorithm || 'sha1').toLowerCase();
+-
+-  // Backwards compatibility - deprecated
+-  if (options.key != null) {
+-    console.warn('Speakeasy - Deprecation Notice - Specifying the secret using `key` is no longer supported. Use `secret` instead.');
+-    secret = options.key;
+-  }
+-
+-  // convert secret to buffer
+-  if (!Buffer.isBuffer(secret)) {
+-    secret = encoding === 'base32' ? base32.decode(secret)
+-      : new Buffer(secret, encoding);
+-  }
++// unpack options
++var secret = options.secret;
++var counter = options.counter;
++var encoding = options.encoding || 'ascii';
++var algorithm = (options.algorithm || 'sha1').toLowerCase();
++
++// Backwards compatibility - deprecated
++if (options.key != null) {
++  console.warn('Speakeasy - Deprecation Notice - Specifying the secret using `key` is no longer supported. Use `secret` instead.');
++  secret = options.key;
++}
++
++// convert secret to buffer
++if (!(secret instanceof Uint8Array)) {
++  secret = encoding === 'base32' ? base32.decode(secret)
++    : new TextEncoder().encode(secret);
++}
+ 
+   // create an buffer from the counter
+-  var buf = new Buffer(8);
+-  var tmp = counter;
+-  for (i = 0; i < 8; i++) {
+-    // mask 0xff over number to get last 8
+-    buf[7 - i] = tmp & 0xff;
+-
+-    // shift 8 and get ready to loop over the next batch of 8
+-    tmp = tmp >> 8;
+-  }
++var buf = new Uint8Array(8);
++var tmp = counter;
++for (i = 0; i < 8; i++) {
++  // mask 0xff over number to get last 8
++  buf[7 - i] = tmp & 0xff;
+ 
+-  // init hmac with the key
+-  var hmac = crypto.createHmac(algorithm, secret);
++  // shift 8 and get ready to loop over the next batch of 8
++  tmp = tmp >> 8;
++}
+ 
+-  // update hmac with the counter
+-  hmac.update(buf);
++// init hmac with the key
++var hmac = crypto.createHmac(algorithm, secret);
+ 
+-  // return the digest
+-  return hmac.digest();
++// update hmac with the counter
++hmac.update(buf);
++
++// return the digest
++return hmac.digest();
+ };
+ 
++
+ /**
+  * Generate a counter-based one-time token. Specify the key and counter, and
+  * receive the one-time password for that counter position as a string. You can
+@@ -460,8 +461,9 @@ exports.generateSecret = function generateSecret (options) {
+   // return a SecretKey with ascii, hex, and base32
+   var SecretKey = {};
+   SecretKey.ascii = key;
+-  SecretKey.hex = Buffer(key, 'ascii').toString('hex');
+-  SecretKey.base32 = base32.encode(Buffer(key)).toString().replace(/=/g, '');
++SecretKey.hex = new TextEncoder().encode(key).reduce((acc, curr) => acc + curr.toString(16).padStart(2, '0'), '');
++SecretKey.base32 = base32.encode(new TextEncoder().encode(key)).toString().replace(/=/g, '');
++
+ 
+   // generate some qr codes if requested
+   if (qr_codes) {
+@@ -591,8 +593,8 @@ exports.otpauthURL = function otpauthURL (options) {
+   }
+ 
+   // convert secret to base32
+-  if (encoding !== 'base32') secret = new Buffer(secret, encoding);
+-  if (Buffer.isBuffer(secret)) secret = base32.encode(secret);
++if (encoding !== 'base32') secret = new TextEncoder().encode(secret);
++if (secret instanceof Uint8Array) secret = base32.encode(secret);
+ 
+   // build query while validating
+   var query = {secret: secret};

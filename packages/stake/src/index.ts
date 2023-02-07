@@ -103,7 +103,7 @@ export const onCronjob: OnRpcRequestHandler = async ({ request }) => {
               isStaking == '1'
                 ? `You have currently staked ${amountAave} ETH in Aave \n You have currently staked ${amountComp} ETH in Compound`
                 : `You are now staking\n`,
-            textAreaContent: `If you would like to change your staking amount, schedule or provider, write stake.
+            textAreaContent: `If you would like to change your staking amount or provider, write stake.
             If you would like to unstake, write unstake.`,
           },
         },

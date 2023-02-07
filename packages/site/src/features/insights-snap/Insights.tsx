@@ -1,38 +1,38 @@
 import { FunctionComponent } from 'react';
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { Button, Form, ButtonGroup } from 'react-bootstrap';
 import { assert } from '@metamask/utils';
 import { Snap, Result } from '../../components';
+import { useInvokeMutation } from '../../api';
+import { getSnapId } from '../../utils/id';
 import { useLazyGetAccountsQuery, useLazyRequestQuery } from '../../api';
 
 const INSIGHTS_SNAP_ID = 'npm:@metamask/test-snap-insights';
 const INSIGHTS_SNAP_PORT = 8003;
 
 export const Insights: FunctionComponent = () => {
-  const [getAccounts, { isLoading: isLoadingAccounts, data: accounts }] =
-    useLazyGetAccountsQuery();
-  const [request, { isLoading: isLoadingRequest, data: transaction, error }] =
-    useLazyRequestQuery();
+  const [invokeSnap, { isLoading, data }] = useInvokeMutation();
 
-  const isLoading = isLoadingAccounts || isLoadingRequest;
-
-  const handleGetAccounts = () => {
-    getAccounts();
+  const handleSubmitAlert = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    invokeSnap({
+      snapId: getSnapId(INSIGHTS_SNAP_ID, INSIGHTS_SNAP_PORT),
+      method: 'dialogAlert',
+    });
   };
 
-  const handleSendTransaction = () => {
-    assert(accounts?.length);
+  const handleSubmitConf = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    invokeSnap({
+      snapId: getSnapId(INSIGHTS_SNAP_ID, INSIGHTS_SNAP_PORT),
+      method: 'dialogConf',
+    });
+  };
 
-    const account = accounts[0];
-    request({
-      method: 'eth_sendTransaction',
-      params: [
-        {
-          from: account,
-          to: account,
-          value: '0x0',
-          data: '0x1',
-        },
-      ],
+  const handleSubmitPrompt = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    invokeSnap({
+      snapId: getSnapId(INSIGHTS_SNAP_ID, INSIGHTS_SNAP_PORT),
+      method: 'dialogPrompt',
     });
   };
 
@@ -43,31 +43,23 @@ export const Insights: FunctionComponent = () => {
       port={INSIGHTS_SNAP_PORT}
       testId="2FASnap"
     >
-      {/* <ButtonGroup>
-        <Button
-          variant="primary"
-          id="getAccounts"
-          className="mb-3"
+        <Button style={{marginRight: "10px"}}
+          id="sendConfButton"
+          onClick={handleSubmitConf}
           disabled={isLoading}
-          onClick={handleGetAccounts}
         >
-          Get Accounts
+          Setup 2FA
         </Button>
         <Button
-          variant="primary"
-          id="sendInsights"
-          className="mb-3"
-          disabled={isLoading || !accounts?.length}
-          onClick={handleSendTransaction}
+          id="sendPromptButton"
+          onClick={handleSubmitPrompt}
+          disabled={isLoading}
         >
           Send Transaction
         </Button>
-      </ButtonGroup> */}
+
       {/* <Result>
-        <span id="insightsResult">
-          {JSON.stringify(transaction, null, 2)}
-          {JSON.stringify(error, null, 2)}
-        </span>
+        <span id="dialogResult">{JSON.stringify(data, null, 2)}</span>
       </Result> */}
     </Snap>
   );
