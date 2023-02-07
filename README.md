@@ -140,8 +140,9 @@ ___
 * Add it to your browser. 
 * For Firefox enter `about:debugging#addons` and load the extension there.
 * For Chrome activate the developer mode and add the unzipped package of the extension.
-* Clone the repository using `git clone`. 
-
+* Clone the repository using `git clone`.
+* Make sure that you have node version 16 installed. 
+## Snaps frontend
 1. Install all the dependencies:
 ```
 yarn
@@ -150,8 +151,35 @@ yarn
 ```
 yarn start
 ```
+## Backend for multisig snap
+1. Install all the dependencies:
+```
+yarn
+```
+2. Start the localhost server:
+```
+yarn start
+```
+## Backend for summary snap
+1. Ensure that you have python version 3.9.x.
+2. Create a virtual environment:
+```
+virtualenv sssenv
+```
 
-
+Activate it:
+```
+source sssenv/bin/activate
+```
+3. Install all the dependencies:
+```
+pip install -r requirements.txt
+```
+4. Copy the `example.env` to `.env` and then set your `API_KEY` and `PORT`.
+5. Run the server:
+```
+python decompile.py
+```
 
 Go to http://localhost:8080 to see the test app.
 
