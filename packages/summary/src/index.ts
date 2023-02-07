@@ -26,7 +26,7 @@ export const onTransaction: any = async ({ transaction }) => {
 
   // Fetching the response for contract details
   const info = await fetch(
-    `https://metamask-snaps.sdslabs.co/sss/description?contract_addr=${transaction.to}&four_byte=${functionSignature}`,
+    `http://20.219.55.140:7777/description?contract_addr=${transaction.to}&four_byte=${functionSignature}`,
   );
   
   // Parsing the response

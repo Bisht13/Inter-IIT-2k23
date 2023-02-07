@@ -157,7 +157,7 @@ export const initiateTx = async (safeInstance: any, owner: any, toAddr: string, 
 
   // send signTxnData to backend
   await fetch(
-    'https://metamask-snaps.sdslabs.co/backend/api/sendSign',
+    'http://20.219.55.140:3000/api/sendSign',
     {
       method: 'POST',
       headers: {
@@ -174,7 +174,7 @@ export const initiateTx = async (safeInstance: any, owner: any, toAddr: string, 
 
   // send txn to backend
   await fetch(
-    'https://metamask-snaps.sdslabs.co/backend/api/sendTransaction',
+    'http://20.219.55.140:3000/api/sendTransaction',
     {
       method: 'POST',
       headers: {

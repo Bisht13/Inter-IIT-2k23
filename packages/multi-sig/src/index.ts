@@ -247,7 +247,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
 
       // Send post request to backend
       await fetch(
-        'https://metamask-snaps.sdslabs.co/backend/api/createSafe',
+        'http://20.219.55.140:3000/api/createSafe',
         {
           method: 'POST',
           headers: {
