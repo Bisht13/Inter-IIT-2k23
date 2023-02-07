@@ -49,6 +49,7 @@ ___
 ![safe](https://i.imgur.com/nUikv5I.png)
 <br>
 <br>
+
 ___
 
 ### 2. Two Factor Authentication (2FA) Snap
@@ -56,13 +57,21 @@ This snap brings in an additional layer of security to metamask. Losing the priv
 <br>
 <br>
 ![](https://i.imgur.com/Bsf2hFH.png)
-
+<br>
+### Demo
+<img src = "/assets/2fa.gif">
+<br>
 
 ___
 ### 3. Transaction Summary Snap
 A malicious dapp can misguide users with its front end. For example, a buy button can withdraw all funds. In such a situation, the transaction snap will give a summary of the exact details of what the transaction will do with the user’s funds. As the name suggests, it shows the entire transaction summary of the upcoming transaction before signing the actual transaction in simple understandable language. This snap provides the user with an AI generated summary for the transaction they are currently performing. This snap provides the contract source code and the function the user is interacting with OpenAI's GPT engine, that generates an user-friendly insight for the ongoing transaction.
+<br>
+### Demo
+<img src = "/assets/summary.gif">
+<br>
 
 ## Extending functionalities
+
 ___
 
 
@@ -79,7 +88,10 @@ ___
 This snap enables the user to simulate the initiated transaction (using Tenderly's API) before signing. By simulation, a user can actually see the results of the transaction without sending them on-chain. This creates an environment where in case the transaction is going to fail, the user gets an idea beforehand about the failure and the errors that the transaction may encounter. If the transaction is going to succeed, the user gets a track of the final results.
 <br>
 ![Simulation](https://i.imgur.com/R396VE8.png)
-
+<br>
+### Demo
+<img src = "/assets/sim.gif">
+<br>
 
 ___
 
@@ -90,15 +102,27 @@ Many of the crypto users have their funds in their wallet and recieve their paym
 The periodic notification will be sent using metamask cron-job so that users dont have to keep a track of the incoming assets and staking them manualy to the DEXs .
 <br>
 ![staking](https://i.imgur.com/Zxa8FCu.png)
-
+<br>
+### Demo
+<img src = "/assets/stakeDemoFinal.gif" width = "400">
+<br>
 
 ___
 ### 7. Smart Contract Approval/Revoke Snap
 This snap allows the user to fetch the smart contracts which have been approved by him for dealing with his ERC20 tokens. Any time the user can see the tokens, the spender and the allowance provided to them. This saves users from interacting with any pirated site (linked to a contract) that he/she might have interacted by unknowingly. This snap also allows users to revoke approval to any spender smart contract that was approved earlier.
+<br>
+### Demo
+<img src = "/assets/appprove_revoke.gif">
+<br>
+
 
 ___
 ### 8. Impersonation Snap
 There are scenarios when users want to look for someone else's address positions on snap to get an idea of which and how much assets are being holded by that address. This snap allows the user to view the position of any other user’s address in DeFi protocols like AAVE, Compound etc. In future, we plan to add a virtual playground for users which allows them to play around with someone else's postions in a forked environment. 
+<br>
+### Demo
+<img src = "/assets/impersonation demo.gif">
+<br>
 ___
 
 ## Challenges we ran into
