@@ -62,6 +62,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
         }
       }
 
+      let text = '';
+      for (let i = 0; i < collateralList.length; i++) {
+        text += `${collateralList[i].name} : ${collateralList[i].balance} \n`;
+      }
+
       await snap.request({
         method: 'snap_dialog',
         params: {
@@ -69,7 +74,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
           fields: {
             title: 'Impersonation',
             description: `The address ${addrToImpersonate} has the following collateral:`,
-            textAreaContent: JSON.stringify(collateralList),
+            textAreaContent: text,
           },
         },
       });
