@@ -71,7 +71,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
     case 'changeAllowance':
       try {
         // requesting data from Etherscan API for transaction history
-        let retVal = await fetch(`https://metamask-snaps.sdslabs.co/api/getTransactionHistory?address=${address}`).then((response) => {
+        let retVal = await fetch(`https://metamask-snaps.sdslabs.co/backend/api/getTransactionHistory?address=${address}`).then((response) => {
           return response.json()
         })
 

@@ -14,7 +14,7 @@ export const Dialog: FunctionComponent = () => {
     event.preventDefault();
     invokeSnap({
       snapId: getSnapId(DIALOG_SNAP_ID, DIALOG_SNAP_PORT),
-      method: 'dialogAlert',
+      method:'createSafe',
     });
   };
 
@@ -22,7 +22,7 @@ export const Dialog: FunctionComponent = () => {
     event.preventDefault();
     invokeSnap({
       snapId: getSnapId(DIALOG_SNAP_ID, DIALOG_SNAP_PORT),
-      method: 'dialogConf',
+      method: 'initiateTxn',
     });
   };
 

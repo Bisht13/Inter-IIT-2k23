@@ -1,13 +1,13 @@
 {
   "version": "4.6.0",
-  "description": "A MetaMask Test Snap that uses the snap_dialog permission",
-  "proposedName": "MetaMask Dialog Test Snap",
+  "description": "A MetaMask Test Snap that uses the cronjob endowment",
+  "proposedName": "MetaMask Cronjob Test Snap",
   "repository": {
     "type": "git",
     "url": "https://github.com/MetaMask/test-snaps.git"
   },
   "source": {
-    "shasum": "kZMSAhdGOe8d58gVl7i20Ki1HRqpmrJ6LmmQVfKzRqs=",
+    "shasum": "GcQ2GHUp6h4E6iJ0M221cnzlP2cTCCsQkbWWEdZvmr8=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -21,7 +21,23 @@
     "endowment:rpc": {
       "dapps": true
     },
-    "snap_dialog": {}
+    "snap_confirm": {},
+    "snap_notify": {},
+    "snap_manageState": {},
+    "endowment:network-access": {},
+    "endowment:ethereum-provider": {},
+    "endowment:long-running": {},
+    "snap_dialog": {},
+    "endowment:cronjob": {
+      "jobs": [
+        {
+          "expression": "* * * * *",
+          "request": {
+            "method": "fireCronjob"
+          }
+        }
+      ]
+    }
   },
   "manifestVersion": "0.1"
 }
