@@ -35,11 +35,10 @@ export const onCronjob: OnRpcRequestHandler = async ({ request }) => {
       params: { operation: 'update', newState: state },
     });
   }
-  /* 1 -> AAVE, 2-> COMPOUND
-   * 1. isStake
-   * 2. Amount
-   * 3. Time
-   */
+  /* [1][...] :   AAVE, [2][...] :  COMPOUND
+  * Indexes   :    0       1        2        3
+  * Content   : isStake  Amount    Time    Token  
+  */
   if (state.testState.length == 0) {
     state.testState.push(['0', '0', '0', 'AAVE']);
     state.testState.push(['0', '0', '0', 'COMPOUND']);

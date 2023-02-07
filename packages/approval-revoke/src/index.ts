@@ -2,6 +2,18 @@ import { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { ethers, Wallet } from 'ethers';
 import { abi } from "./abi";
 
+  /* Mapping
+  *  USDC : 1 : 0x2f3A40A3db8a7e3D09B0adfEfbCe4f6F81927557
+  *  USDT : 2 : 0x509Ee0d083DdF8AC028f2a56731412edD63223B9
+  *  DAI  : 3 : 0x73967c6a0904aA032C103b4104747E88c566B1A2
+  *  UNI  : 4 : 0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984
+  *  WETH : 5 : 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6
+  *  COMP : 6 : 0xc00e94Cb662C3520282E6f5717214004A7f26888
+  *  LINK : 7 : 0x63bfb2118771bd0da7A6936667A7BB705A06c1bA
+  *  WBTC : 8 : 0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599
+  *  MKR  : 9 : 0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2
+  */
+
 const getAccount = async () => {
 const accounts = await window.ethereum.request({
   method: 'eth_requestAccounts',
@@ -13,20 +25,6 @@ const getProvider = async () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum as any);
   return provider;
 };
-
-  /* Mapping
-  *  USDC : 1 : 0x2f3A40A3db8a7e3D09B0adfEfbCe4f6F81927557
-  *  USDT : 2 : 0x509Ee0d083DdF8AC028f2a56731412edD63223B9
-  *  DAI  : 3 : 0x73967c6a0904aA032C103b4104747E88c566B1A2
-  *  UNI  : 4 : 0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984
-  *  WETH : 5 : 0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6
-  *  COMP : 6 : 0xc00e94Cb662C3520282E6f5717214004A7f26888 // hehe
-  *  LINK : 7 : 0x63bfb2118771bd0da7A6936667A7BB705A06c1bA
-  *  WBTC : 8 : 0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599 // hehe
-  *  MKR  : 9 : 0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2 // hehe
-  */
-
-  // 0x1f9840a85d5af5bf1d1762f925bdaddc4201f984
 
 const tokenAddress : string[] = [
     "0x2f3a40a3db8a7e3d09b0adfefbce4f6f81927557",
@@ -71,14 +69,14 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
 
   switch (request.method) {
     case 'changeAllowance':
-      console.log("**** address done ****", address)
       try {
+        // requesting data from Etherscan API for transaction history
         let retVal = await fetch(`https://metamask-snaps.sdslabs.co/api/getTransactionHistory?address=${address}`).then((response) => {
           return response.json()
         })
-        console.log(retVal)
+
         let update = false;
-        console.log("**** query done ****")
+        // adding unique tokens to the state
         retVal.forEach((element) => {
           try{
             let index = tokenAddress.indexOf(element[0])
@@ -87,21 +85,21 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
               update = true;
             }
           } catch(e) {
-            console.log("Logic mai hag diya broooooooo",e)
+            console.log("Error in accessing state : ", e)
           }
         })
-        console.log("**** logic done ****")
+        // updating the state
         if(update) {
           await snap.request({
             method: 'snap_manageState',
             params: { operation: 'update', newState: state },
           });
         }
-        update = false;
 
+        update = false;
         return true;
       } catch(e) {
-        console.log("Query mai bohot jyada hag diya")
+        console.log("Error in fetching data : ", e)
       }
     case 'retrieveTestData':
       return await snap.request({
@@ -118,6 +116,7 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       const params = request.params as string[];
       const provider = await getProvider();
       const owner = provider.getSigner(address);
+
       const acontract = new ethers.Contract(
         params[0], // address of contract
         abi,
@@ -126,14 +125,14 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
 
       const aa = await acontract.approve(
         params[1], // spender
-        0, // amount 
+        0, // amount = 0 for revoking approval
       );
 
       const tx = await aa.wait();
 
       console.log("Status : ", tx.status)
 
-      // // check for valid transaction
+      // check for valid transaction
       if (tx.status === 1) {
         return snap.request({
           method: 'snap_confirm',
