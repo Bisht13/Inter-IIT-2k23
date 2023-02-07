@@ -134,16 +134,24 @@ ___
 
 ## Setup
 
-The project setups are as follows:
+### The project setups are as follows:
+
+* Install Metamask flask extension version 10.24.1 or higher from the metamask-extensions Github repository.
+* Add it to your browser. 
+* For Firefox enter `about:debugging#addons` and load the extension there.
+* For Chrome activate the developer mode and add the unzipped package of the extension.
+* Clone the repository using `git clone`. 
 
 1. Install all the dependencies:
 ```
-yarn install
+yarn
 ```
 2. Start the localhost server:
 ```
 yarn start
 ```
+
+
 
 Go to http://localhost:8080 to see the test app.
 
