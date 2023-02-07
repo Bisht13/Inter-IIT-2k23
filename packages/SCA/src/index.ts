@@ -301,7 +301,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
         to: account_,
         value: ethers.utils.parseEther(inputValue as string),
       };
-      await owner.sendTransaction(txparam);
+      let tx = await owner.sendTransaction(txparam);
+      await tx.wait();
 
       const inputAddr_ = (inputAddr as string).split(',');
       let addresses = [];
