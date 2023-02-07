@@ -21,9 +21,6 @@
     "endowment:rpc": {
       "dapps": true
     },
-    "snap_confirm": {},
-    "snap_notify": {},
-    "snap_manageState": {},
     "endowment:ethereum-provider": {},
     "snap_dialog": {},
     "endowment:network-access": {}

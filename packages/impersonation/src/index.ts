@@ -1,6 +1,5 @@
 import { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { ethers } from 'ethers';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { abiJsonPoolDataProvider } from './abi';
 import { erc20tokens } from './constants';
 
