@@ -1,0 +1,31 @@
+{
+  "version": "4.6.0",
+  "description": "An example Snap that signs messages using BLS.",
+  "proposedName": "@metamask/test-snap-bip44",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/test-snaps.git"
+  },
+  "source": {
+    "shasum": "YhLTlRGoLz+WfRxinPPju2A7I0daNcwTNU5NOPfHKrA=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "packageName": "@metamask/test-snap-bip44",
+        "registry": "https://registry.npmjs.org"
+      }
+    }
+  },
+  "initialPermissions": {
+    "endowment:rpc": {
+      "dapps": true
+    },
+    "snap_confirm": {},
+    "snap_getBip44Entropy": [
+      {
+        "coinType": 1
+      }
+    ]
+  },
+  "manifestVersion": "0.1"
+}
