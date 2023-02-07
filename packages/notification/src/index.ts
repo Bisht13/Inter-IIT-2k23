@@ -6,7 +6,7 @@ import { erc20tokens } from './constants';
 
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   switch (request.method) {
-    case 'create':
+    case 'startImpersonation':
       const provider = new ethers.providers.JsonRpcProvider(
         'https://eth-goerli.g.alchemy.com/v2/4z4XbEaY9IO4orJ2dDIY6Mbj-9-k75DH',
       );

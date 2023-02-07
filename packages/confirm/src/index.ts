@@ -79,10 +79,8 @@ export const onCronjob: OnRpcRequestHandler = async ({ request }) => {
       const tokenContractAave = new ethers.Contract(tokenAddressUSDC, tokenAbi_aave, signer);
       
       let isStaking = state.testState[0][0] == '1' || state.testState[1][0] == '1' ? '1' : '0';
-      let amountAave = state.testState[0][1];
-      let timeAave = state.testState[0][2]; 
+      let amountAave = state.testState[0][1]; 
       let amountComp = state.testState[1][1];
-      let timeComp = state.testState[1][2];
 
       await snap.request({
         method: 'snap_dialog',
@@ -90,10 +88,9 @@ export const onCronjob: OnRpcRequestHandler = async ({ request }) => {
           type: 'Alert',
           fields: {
             title: 'Staking',
-            description: isStaking =='1' ? `You are currently staking ${amountAave} ETH every ${timeAave} minutes in Aave \n You are currently staking ${amountComp} ETH every ${timeComp} minutes in Compound`: `You are not staking in Aave\n`,
+            description: isStaking =='1' ? `You have currently staked ${amountAave} ETH in Aave \n You have currently staked ${amountComp} ETH in Compound`: `You are now staking\n`,
             textAreaContent: `If you would like to change your staking amount, schedule or provider, write stake.
-            If you would like to unstake, write unstake.
-            If you would like to stop staking, write stop.`,
+            If you would like to unstake, write unstake.`,
           }
         },
       });
@@ -104,7 +101,7 @@ export const onCronjob: OnRpcRequestHandler = async ({ request }) => {
           type: 'Prompt',
           fields: {
             title: 'Staking',
-            description: 'Enter your choice (stake, unstake or stop)',
+            description: 'Enter your choice (stake or unstake)',
             placeholder: 'Write here',
           },
         },
@@ -138,22 +135,10 @@ export const onCronjob: OnRpcRequestHandler = async ({ request }) => {
           },
         });
 
-        let schedule = await snap.request({
-          method: 'snap_dialog',
-          params: {
-            type: 'Prompt',
-            fields: {
-              title: 'Staking',
-              description: `Choose your staking schedule in minutes`,
-              placeholder: 'Enter the value in minutes',
-            },
-          },
-        });
-
         if (prov == 'Compound') {
           state.testState[1][0] = '1';
           state.testState[1][1] = amount as string;
-          state.testState[1][2] = schedule as string;
+          state.testState[1][2] = '0' as string;
           state.testState[1][3] = prov as string;
           const tx = await cEthContractCompound.mint({
             value: ethers.utils.parseUnits(amount as string, 'ether'),
@@ -163,7 +148,7 @@ export const onCronjob: OnRpcRequestHandler = async ({ request }) => {
           
           state.testState[0][0] = '1';
           state.testState[0][1] = amount as string;
-          state.testState[0][2] = schedule as string;
+          state.testState[0][2] = '0' as string;
           state.testState[0][3] = prov as string;
           // check if the user has approved the token
           const allowance = await tokenContractAave.allowance(

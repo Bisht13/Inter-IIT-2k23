@@ -24,24 +24,16 @@ export const Notification: FunctionComponent = () => {
       port={NOTIFICATION_SNAP_PORT}
       testId="Notification"
     >
-      {/* <ButtonGroup>
+      <ButtonGroup>
         <Button
           variant="primary"
-          id="sendInAppNotification"
+          id="start-impersonation-snap"
           disabled={isLoading}
-          onClick={handleClick('inApp')}
+          onClick={handleClick('startImpersonation')}
         >
-          Send In-App Notification
+          Start Impersonation Snap
         </Button>
-        <Button
-          variant="secondary"
-          id="sendNativeNotification"
-          disabled={isLoading}
-          onClick={handleClick('native')}
-        >
-          Send Native Notification
-        </Button>
-      </ButtonGroup> */}
+  </ButtonGroup>
     </Snap>
   );
 };
