@@ -5,3 +5,7 @@ The architecture we chose for the smart contract accounts is an upgradable one w
 * **Batch Transaction** - If the user wants to execute many transactions but does not have enough gas fees to do so. Then batch transaction comes in where the user can batch/compile many transactions into one and execute all by paying the gas fees for just one transaction. A perfect example of this is transaferring ethers or erc20 tokens to different addresses in a single click, let's say a payroll, leveraging which includes supplying, borrowing and then again supplying. All these transactions are done as a single batched transaction which helps users to save gas fees.
 * **Multiple auths** - The owner becomes the master owner and can add multiple auths to handle his transactions using a role based system. Also, if an auth looses his rights, the other auths have the power to help him regain it.
 * **Whitelisting** - The smart contract wallet allows user to whitelist specific contracts, for specific functionalities. This feature saves users' funds from any contract that might be trying to steal them .
+<br>
+### Demo
+<img src = "/assets/sca.gif">
+<br>
