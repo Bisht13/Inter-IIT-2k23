@@ -5,40 +5,76 @@ import { Tag, useInvokeMutation } from '../../api';
 import { MANAGE_STATE_ACTUAL_ID } from './ManageState';
 
 export const SendData: FunctionComponent = () => {
-  const [value, setValue] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [invokeSnap, { isLoading, data }] = useInvokeMutation();
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
+  const handleChange =
+    (fn: Dispatch<SetStateAction<string>>) =>
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      fn(event.target.value);
+    };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+
+  const handleSubmit = () => {
     invokeSnap({
       snapId: MANAGE_STATE_ACTUAL_ID,
       method: 'storeTestData',
-      params: [value],
+      tags: [Tag.TestState],
+    });
+  };
+
+  const changeAllowance = () => {
+    invokeSnap({
+      snapId: MANAGE_STATE_ACTUAL_ID,
+      method: 'changeAllowance',
+      tags: [Tag.TestState],
+    });
+  };
+
+  const handleRevoke = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("title : ", title)
+    console.log("description : ", description)
+    invokeSnap({
+      snapId: MANAGE_STATE_ACTUAL_ID,
+      method: 'revoke',
+      params: [title, description],
       tags: [Tag.TestState],
     });
   };
 
   return (
     <>
-      <Form onSubmit={handleSubmit} className="mb-3">
+      <Button type="submit" id="sendManageState" disabled={isLoading} onClick={changeAllowance}>
+          Update List
+      </Button>
+      <hr></hr>
+      <Form onSubmit={handleRevoke} className="mb-3">
         <Form.Group>
-          <Form.Label>Value</Form.Label>
+          <Form.Label>Token Address</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Value"
-            value={value}
-            onChange={handleChange}
-            id="dataManageState"
-            className="mb-3"
+            placeholder="address"
+            value={title}
+            onChange={handleChange(setTitle)}
+            id="msgTitle"
+            className="mb-2"
+          />
+
+          <Form.Label>Spender Address</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={handleChange(setDescription)}
+            id="msgDescription"
+            className="mb-2"
           />
         </Form.Group>
 
         <Button type="submit" id="sendManageState" disabled={isLoading}>
-          Send Data
+            Revoke
         </Button>
       </Form>
 

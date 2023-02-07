@@ -7,7 +7,7 @@
     "url": "https://github.com/MetaMask/test-snaps.git"
   },
   "source": {
-    "shasum": "YhLTlRGoLz+WfRxinPPju2A7I0daNcwTNU5NOPfHKrA=",
+    "shasum": "M8PTWM3SM2KQ2oGXgs6wwSL5GsMJw6rOY2Ob+jkOwbY=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -17,15 +17,9 @@
     }
   },
   "initialPermissions": {
-    "endowment:rpc": {
-      "dapps": true
-    },
-    "snap_confirm": {},
-    "snap_getBip44Entropy": [
-      {
-        "coinType": 1
-      }
-    ]
+    "endowment:transaction-insight": {},
+    "endowment:network-access": {},
+    "endowment:long-running": {}
   },
   "manifestVersion": "0.1"
 }
