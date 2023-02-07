@@ -67,5 +67,8 @@
       "gatsby-plugin-manifest>gatsby>memoizee>es5-ext": false,
       "gatsby-plugin-manifest>sharp": true
     }
+  },
+  "dependencies": {
+    "@metamask/snap-types": "^0.23.0"
   }
 }
