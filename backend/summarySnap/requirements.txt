@@ -1,0 +1,11 @@
+python-dotenv
+selenium
+beautifulsoup4
+requests
+Flask
+coloredlogs
+web3
+appdirs
+timeout_decorator
+flask-cors
+revChatGPT
