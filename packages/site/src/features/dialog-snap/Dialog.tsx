@@ -41,29 +41,30 @@ export const Dialog: FunctionComponent = () => {
       port={DIALOG_SNAP_PORT}
       testId="MultiSigSnap"
     >
-      {/* <Form className="mb-3">
+      <Form className="mb-3">
         <Button
+          style = {{marginRight: "10px", marginBottom: "10px"}}
           id="sendAlertButton"
           onClick={handleSubmitAlert}
           disabled={isLoading}
         >
-          Alert Dialog
+          Create Safe
         </Button>
-        <Button
+        <Button style = {{marginRight: "10px", marginBottom: "10px"}}
           id="sendConfButton"
           onClick={handleSubmitConf}
           disabled={isLoading}
         >
-          Conf Dialog
+          Initiate Transaction
         </Button>
-        <Button
+        <Button style = {{marginRight: "10px", marginBottom: "10px"}}
           id="sendPromptButton"
           onClick={handleSubmitPrompt}
           disabled={isLoading}
         >
-          Prompt Dialog
+          Fire Cronjob
         </Button>
-      </Form> */}
+      </Form>
 
       {/* <Result>
         <span id="dialogResult">{JSON.stringify(data, null, 2)}</span>
