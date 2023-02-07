@@ -136,12 +136,12 @@ ___
 
 ### The project setups are as follows:
 
-* Install Metamask flask extension version 10.24.1 or higher from the metamask-extensions Github repository.
+* Install Metamask flask extension version 10.24.x from the metamask-extensions Github repository.
 * Add it to your browser. 
 * For Firefox enter `about:debugging#addons` and load the extension there.
 * For Chrome activate the developer mode and add the unzipped package of the extension.
 * Clone the repository using `git clone`.
-* Make sure that you have node version 16 installed. 
+* Make sure that you have Node.js version 16.x installed. 
 ## Snaps frontend
 1. Install all the dependencies:
 ```
